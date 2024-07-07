@@ -1,0 +1,45 @@
+/*
+ * Copyright (c) 2022 Espressif Systems (Shanghai) Co., Ltd.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/ {
+	aliases {
+		sw0 = &btn0;
+		sw1 = &btn1;
+		rly0 = &rly0;
+		rly1 = &rly1;
+	};
+
+	buttons {
+		compatible = "gpio-keys";
+		btn0: gpio21 {
+			gpios = <&gpio0 21 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>; //Change it to GPIO_ACTIVE_HIGH for actual state
+			label = "User Button 0";
+		};
+
+		btn1: gpio22 {
+			gpios = <&gpio0 22 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>; //Change it to GPIO_ACTIVE_HIGH for actual state
+			label = "User Button 1";
+		};
+	};
+
+	leds {
+		compatible = "gpio-leds";
+		rly0: gpio9 {
+			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
+			label = "Relay 0";
+		};
+
+		compatible = "gpio-leds";
+		rly1: gpio10 {
+			gpios = <&gpio0 10 GPIO_ACTIVE_LOW>;
+			label = "Relay 1";
+		};
+	};
+};
+
+&wifi {
+	status = "okay";
+};
