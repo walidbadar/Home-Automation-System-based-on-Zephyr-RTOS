@@ -21,5 +21,4 @@ Requirements
 - Linux machine (Raspberry Pi)
 - ESP32 Devkit-C
 - Home Assistant
-- Mosquitto server: any version that supports MQTT v3.1.1. This sample
-  was tested with mosquitto 1.3.4.
+- Mosquitto Broker
