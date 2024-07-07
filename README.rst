@@ -1,4 +1,4 @@
-![Web Interface](Home-Automation.png)
+
 
 .. zephyr:code-sample:: home-automation
    :name: Home Automation
