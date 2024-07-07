@@ -19,10 +19,6 @@
 #include "include/mqtt_config.h"
 #include "include/gpio_config.h"
 
-#include <zephyr/net/net_if.h>
-#include <zephyr/net/wifi_mgmt.h>
-#include <zephyr/logging/log.h>
-
 /**
  * @brief The main loop.
  *
@@ -49,7 +45,7 @@ int main(void)
 	}
 
     /* Initialize Wi-Fi with the SSID and password */
-    rc = wifi_init("Ammad_C-25", "ammad175");
+    rc = wifi_init("SSID", "PSK");
 
     while (1) {
         /*
