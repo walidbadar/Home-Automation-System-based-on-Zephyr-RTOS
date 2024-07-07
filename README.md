@@ -1,16 +1,6 @@
-System Diagram
-**************
-![Alt text](https://github.com/walidbadar/Home-Automation-using-Zephyr-RTOS/blob/main/Home-Automation.png)
-
-.. zephyr:code-sample:: home-automation
-   :name: Home Automation
-   :relevant-api: mqtt_socket
-
-   Send MQTT PUBLISH messages to an MQTT server and 
-   Receive MQTT SUBSCRIBE messages from an MQTT server.
-
 Overview
 ********
+![Alt text](https://github.com/walidbadar/Home-Automation-using-Zephyr-RTOS/blob/main/Home-Automation.png)
 
 `MQTT <http://mqtt.org/>`_ (MQ Telemetry Transport) is a lightweight
 publish/subscribe messaging protocol optimized for small sensors and
