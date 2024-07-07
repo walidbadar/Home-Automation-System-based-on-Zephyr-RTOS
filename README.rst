@@ -1,3 +1,4 @@
+
 .. zephyr:code-sample:: home-automation
    :name: Home Automation
    :relevant-api: mqtt_socket
