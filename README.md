@@ -11,7 +11,6 @@ that sends MQTT PUBLISH messages to a MQTT broker and
 receives MQTT SUBSCRIBE messages from an MQTT broker. 
 It also uses GPIO to manually toggle electrical appliances
 connected to the device. This application supports MQTT v3.1.1.
-See the `MQTT V3.1.1 spec`_ for more information.
 
 .. _MQTT V3.1.1 spec: http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/mqtt-v3.1.1.html
 
