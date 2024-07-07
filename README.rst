@@ -2,7 +2,8 @@
    :name: Home Automation
    :relevant-api: mqtt_socket
 
-   Send MQTT PUBLISH messages to an MQTT server and Receive MQTT SUBSCRIBE messages from an MQTT server.
+   Send MQTT PUBLISH messages to an MQTT server and 
+   Receive MQTT SUBSCRIBE messages from an MQTT server.
 
 Overview
 ********
