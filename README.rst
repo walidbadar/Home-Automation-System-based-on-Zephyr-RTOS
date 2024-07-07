@@ -1,3 +1,4 @@
+![Web Interface](https://github.com/walidbadar/Home-Automation-using-Zephyr-RTOS/blob/fd8d4a613023c65c772fe72d9a757712f0ab9af7/Home-Automation.png)
 
 .. zephyr:code-sample:: home-automation
    :name: Home Automation
