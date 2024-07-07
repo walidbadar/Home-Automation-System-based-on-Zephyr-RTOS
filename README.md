@@ -1,4 +1,5 @@
 
+![Alt text](https://github.com/walidbadar/Home-Automation-using-Zephyr-RTOS/blob/main/Home-Automation.png)
 
 .. zephyr:code-sample:: home-automation
    :name: Home Automation
