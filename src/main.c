@@ -40,7 +40,7 @@ int main(void)
     }
 
     for (int index = 0; index<LIMIT; i++) {
-        bool state = digital_read(&buttons[i]);
+        bool state = digital_read(&buttons[index]);
         digital_write(&relays[index], state);
     }
 
