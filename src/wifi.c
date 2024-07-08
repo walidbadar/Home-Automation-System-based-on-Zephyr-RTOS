@@ -231,8 +231,7 @@ int8_t wifi_init(char *SSID, char *PSK)
     k_sem_take(&wifi_connected, K_FOREVER);
     wifi_status();
     k_sem_take(&ipv4_address_obtained, K_FOREVER);
-	// LOG_INF("Wifi Status: %d", handle_wifi_disconnect_result(&wifi_cb));
     LOG_INF("Ready...");
 
-	return 0;
+    return 0;
 }
