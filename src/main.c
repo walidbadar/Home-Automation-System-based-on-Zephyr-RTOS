@@ -7,13 +7,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+#include <stdlib.h>
+#include <stdbool.h>
 #include <zephyr/kernel.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/sys/util.h>
 #include <zephyr/sys/printk.h>
-
-#include <stdlib.h>
-#include <stdbool.h>
 
 #include "include/wifi.h"
 #include "include/mqtt_config.h"
