@@ -39,10 +39,10 @@ int main(void)
         pin_mode(&relays[index], GPIO_OUTPUT);
     }
 
-	for (int i = 0; i<LIMIT; i++) {
-		bool state = digital_read(&buttons[i]);
-		digital_write(&relays[i], state);
-	}
+    for (int index = 0; index<LIMIT; i++) {
+        bool state = digital_read(&buttons[i]);
+        digital_write(&relays[index], state);
+    }
 
     /* Initialize Wi-Fi with the SSID and password */
     rc = wifi_init("SSID", "PSK");
