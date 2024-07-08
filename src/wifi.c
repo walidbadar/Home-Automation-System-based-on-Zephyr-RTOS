@@ -204,7 +204,7 @@ void wifi_ap(void){
     net_if_ipv4_set_gw(iface, &gw);
     net_if_ipv4_set_netmask(iface, &netmask);
 
-	LOG_INF("Attempting to enable WiFi AP mode...");
+    LOG_INF("Attempting to enable WiFi AP mode...");
     int ret = net_mgmt(NET_REQUEST_WIFI_AP_ENABLE, iface, &ap_params, sizeof(ap_params));
     if (ret) {
         LOG_ERR("Failed to enable AP mode. Error code: %d", ret);
