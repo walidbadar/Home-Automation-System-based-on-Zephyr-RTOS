@@ -7,15 +7,16 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+#include <errno.h>
 #include <zephyr/kernel.h>
 #include <zephyr/net/net_if.h>
 #include <zephyr/net/wifi_mgmt.h>
 #include <zephyr/net/net_event.h>
 #include <zephyr/toolchain.h>
-#include <errno.h>
-#include "include/wifi.h"
-
 #include <zephyr/logging/log.h>
+#include "wifi.h"
+#include "config.h"
+
 LOG_MODULE_REGISTER(wifi_app, LOG_LEVEL_DBG);
 
 static K_SEM_DEFINE(wifi_connected, 0, 1);
@@ -204,7 +205,7 @@ void wifi_ap(void){
     net_if_ipv4_set_gw(iface, &gw);
     net_if_ipv4_set_netmask(iface, &netmask);
 
-    LOG_INF("Attempting to enable WiFi AP mode...");
+	LOG_INF("Attempting to enable WiFi AP mode...");
     int ret = net_mgmt(NET_REQUEST_WIFI_AP_ENABLE, iface, &ap_params, sizeof(ap_params));
     if (ret) {
         LOG_ERR("Failed to enable AP mode. Error code: %d", ret);
@@ -231,7 +232,8 @@ int8_t wifi_init(char *SSID, char *PSK)
     k_sem_take(&wifi_connected, K_FOREVER);
     wifi_status();
     k_sem_take(&ipv4_address_obtained, K_FOREVER);
+	// LOG_INF("Wifi Status: %d", handle_wifi_disconnect_result(&wifi_cb));
     LOG_INF("Ready...");
 
-    return 0;
+	return 0;
 }

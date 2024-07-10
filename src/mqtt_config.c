@@ -6,20 +6,21 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+#include <string.h>
+#include <errno.h>
 #include <zephyr/kernel.h>
 #include <zephyr/net/socket.h>
 #include <zephyr/net/mqtt.h>
 #include <zephyr/device.h>
 #include <zephyr/drivers/gpio.h>
-
 #include <zephyr/random/random.h>
-#include <string.h>
-#include <errno.h>
-#include "include/mqtt_config.h"
-#include "include/gpio_config.h"
-
 #include <zephyr/logging/log.h>
+#include "mqtt_config.h"
+#include "gpio_config.h"
+#include "config.h"
+
 LOG_MODULE_REGISTER(mqtt_app, LOG_LEVEL_DBG);
+
 
 #define SUCCESS_OR_EXIT(rc) { if (rc != 0) { return 1; } }
 #define SUCCESS_OR_BREAK(rc) { if (rc != 0) { break; } }

@@ -14,15 +14,18 @@
 #include <zephyr/sys/util.h>
 #include <zephyr/sys/printk.h>
 
-#include "include/wifi.h"
-#include "include/mqtt_config.h"
-#include "include/gpio_config.h"
+#include "wifi.h"
+#include "mqtt_config.h"
+#include "gpio_config.h"
+#include "config.h"
 
 /**
  * @brief The main loop.
  *
  * This function initializes Wi-Fi and then enters an infinite loop,
  * calling the pubSub() function every 100 milliseconds.
+ *
+ * @return void
  */
 int main(void)
 {
@@ -36,15 +39,15 @@ int main(void)
         pin_mode(&buttons[index], GPIO_INPUT);
         // Set the direction of each relay to output
         pin_mode(&relays[index], GPIO_OUTPUT);
-    }
 
-    for (int index = 0; index<LIMIT; i++) {
+        // Read the state of the button
         bool state = digital_read(&buttons[index]);
+        // Set the state of the corresponding relay
         digital_write(&relays[index], state);
     }
 
     /* Initialize Wi-Fi with the SSID and password */
-    rc = wifi_init("SSID", "PSK");
+    rc = wifi_init("Ammad_C-25", "ammad175");
 
     while (1) {
         /*

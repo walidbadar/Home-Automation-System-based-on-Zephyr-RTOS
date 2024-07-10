@@ -8,7 +8,8 @@
 #include <zephyr/device.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/sys/util.h>
-#include "include/gpio_config.h"
+#include "gpio_config.h"
+#include "config.h"
 
 #include <zephyr/logging/log.h>
 LOG_MODULE_REGISTER(gpio_config, LOG_LEVEL_DBG);
