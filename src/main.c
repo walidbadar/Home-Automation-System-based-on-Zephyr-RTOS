@@ -47,7 +47,7 @@ int main(void)
     }
 
     /* Initialize Wi-Fi with the SSID and password */
-    rc = wifi_init("Ammad_C-25", "ammad175");
+    rc = wifi_init("SSID", "PSK");
 
     while (1) {
         /*
