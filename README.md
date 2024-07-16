@@ -1,5 +1,4 @@
-Overview
-********
+### Overview
 ![Alt text](https://github.com/walidbadar/Home-Automation-using-Zephyr-RTOS/blob/main/System-Block-Diagram.png)
 
 MQTT http://mqtt.org (MQ Telemetry Transport) is a lightweight
@@ -10,9 +9,7 @@ The Zephyr Home Automation application is a MQTT client, enabling it to both sen
 
 MQTT V3.1.1 spec: http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/mqtt-v3.1.1.html
 
-Requirements
-************
-
+### Requirements
 - Linux machine (Raspberry Pi)
 - ESP32 Devkit-C
 - Home Assistant
