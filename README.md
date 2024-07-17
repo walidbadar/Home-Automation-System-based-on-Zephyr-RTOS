@@ -1,5 +1,5 @@
 ### Overview
-![Alt text](https://github.com/walidbadar/Home-Automation-using-Zephyr-RTOS/blob/main/System-Block-Diagram.png)
+![Alt text](https://github.com/walidbadar/Home-Automation-using-Zephyr-RTOS/blob/main/img/System-Block-Diagram.png)
 
 MQTT http://mqtt.org (MQ Telemetry Transport) is a lightweight
 publish/subscribe messaging protocol optimized for small sensors and
