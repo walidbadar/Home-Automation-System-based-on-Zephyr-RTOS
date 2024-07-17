@@ -10,7 +10,7 @@ The Zephyr Home Automation application is a MQTT client, enabling it to both sen
 MQTT V3.1.1 spec: http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/mqtt-v3.1.1.html
 
 ### Requirements
-- Linux machine (Raspberry Pi)
-- ESP32 Devkit-C
-- Home Assistant
-- Mosquitto Broker
+- [Linux machine (Raspberry Pi)](https://www.raspberrypi.org/)
+- [ESP32 Devkit-C](https://www.espressif.com/en/products/devkits/esp32-devkitc/overview)
+- [Home Assistant](https://www.home-assistant.io/)
+- [Mosquitto Broker](https://mosquitto.org/)
