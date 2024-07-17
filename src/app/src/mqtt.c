@@ -27,12 +27,12 @@ LOG_MODULE_REGISTER(mqtt_app, LOG_LEVEL_DBG);
 #define SUCCESS_OR_BREAK(rc) { if (rc != 0) { break; } }
 
 /* Publish Topic list*/
-char *pub_topic_name[] = {"/room2/status/outlet1", "/room2/status/outlet2"};
-size_t numberOfPubTopics = ARRAY_SIZE(pub_topic_name);
+char *pub_topics[] = {"/room2/status/outlet1", "/room2/status/outlet2"};
+size_t size_of_pub_topics = ARRAY_SIZE(pub_topics);
 
 /* Subscribed Topic list*/
-char *sub_topic_name[] = {"/room2/set/outlet1", "/room2/set/outlet2"};
-size_t numberOfSubTopics = ARRAY_SIZE(sub_topic_name);
+char *sub_topics[] = {"/room2/set/outlet1", "/room2/set/outlet2"};
+size_t size_of_sub_topics = ARRAY_SIZE(sub_topics);
 
 /* Buffers for MQTT client. */
 static uint8_t rx_buffer[APP_MQTT_BUFFER_SIZE];
@@ -184,8 +184,8 @@ void mqtt_evt_handler(struct mqtt_client *const client,
 
 		/* Toggle Relay State when payload is recieved from Home Assistant*/
 		for(int index=0; index<LIMIT; index++)
-			if (!strcmp(subTopic, sub_topic_name[index])) 
-				sub_relay_state(&relays[index], data, pub_topic_name[index]);
+			if (!strcmp(subTopic, sub_topics[index])) 
+				sub_relay_state(&relays[index], data, pub_topics[index]);
 
 		puback.message_id = evt->param.publish.message_id;
 		mqtt_publish_qos1_ack(&client_ctx, &puback);
@@ -196,21 +196,21 @@ void mqtt_evt_handler(struct mqtt_client *const client,
 	}
 }
 
-int subscribe(struct mqtt_client *client, char *getSubTopic[], size_t numberOfSubTopics)
+int subscribe(struct mqtt_client *client, char *sub_topics[], size_t size_of_pub_topics)
 {
 	int ret;
 
-	struct mqtt_topic topics[numberOfSubTopics];
+	struct mqtt_topic topics[size_of_pub_topics];
 	struct mqtt_subscription_list sub;
 
 	for (size_t i = 0; i < ARRAY_SIZE(topics); ++i) {
-        topics[i].topic.utf8 = getSubTopic[i];
-        topics[i].topic.size = strlen(getSubTopic[i]);
+        topics[i].topic.utf8 = sub_topics[i];
+        topics[i].topic.size = strlen(sub_topics[i]);
         topics[i].qos = MQTT_QOS_0_AT_MOST_ONCE;
     }
 
 	sub.list = topics;
-	sub.list_count = numberOfSubTopics;
+	sub.list_count = size_of_pub_topics;
 	sub.message_id = sys_rand32_get();
 
 	LOG_INF("Subscribing to %hu topic(s)", sub.list_count);
@@ -223,15 +223,15 @@ int subscribe(struct mqtt_client *client, char *getSubTopic[], size_t numberOfSu
 	return ret;
 }
 
-int publish(struct mqtt_client *client, char *get_pub_topic, char *get_payload)
+int publish(struct mqtt_client *client, char *pub_topics, char *payload)
 {
 	struct mqtt_publish_param param;
 
 	param.message.topic.qos = 0;
-	param.message.topic.topic.utf8 = (uint8_t *)get_pub_topic;
+	param.message.topic.topic.utf8 = (uint8_t *)pub_topics;
 	param.message.topic.topic.size =
 			strlen(param.message.topic.topic.utf8);
-	param.message.payload.data = get_payload;
+	param.message.payload.data = payload;
 	param.message.payload.len =
 			strlen(param.message.payload.data);
 	param.message_id = sys_rand32_get();
@@ -345,15 +345,15 @@ int process_mqtt_and_sleep(struct mqtt_client *client, int timeout)
 }
 
 /*Publish Physical Switch State*/
-int8_t pub_switch_state(struct gpio_dt_spec *button, uint8_t index, char *pub_topic_name){
+int8_t pub_switch_state(struct gpio_dt_spec *button, uint8_t index, char *pub_topics){
     int8_t rc;
     bool currentState = digital_read(button);
     static bool previousState[32] = {false};
 
     // Check if the state has changed
 	if(previousState[index] ^ currentState){
-		if(currentState) rc = publish(&client_ctx, pub_topic_name, "1");
-		else rc = publish(&client_ctx, pub_topic_name, "0");
+		if(currentState) rc = publish(&client_ctx, pub_topics, "1");
+		else rc = publish(&client_ctx, pub_topics, "0");
 	}
 	previousState[index] = currentState;
 
@@ -361,15 +361,15 @@ int8_t pub_switch_state(struct gpio_dt_spec *button, uint8_t index, char *pub_to
 }
 
 /*Subsribe to Home Assistant Switch States*/
-int8_t sub_relay_state(struct gpio_dt_spec *relay, char *payload, char *pub_topic_name){
+int8_t sub_relay_state(struct gpio_dt_spec *relay, char *payload, char *pub_topics){
 	int8_t rc;
 
 	if(!strcmp(payload, "1")) {
-		rc = publish(&client_ctx, pub_topic_name, "1");
+		rc = publish(&client_ctx, pub_topics, "1");
 		digital_write(relay, 1);
 		LOG_INF("Relay State: 1");
 	} else if(!strcmp(payload, "0")) {
-		rc = publish(&client_ctx, pub_topic_name, "0");
+		rc = publish(&client_ctx, pub_topics, "0");
 		digital_write(relay, 0);
 		LOG_INF("Relay State: 0");
 	}
@@ -385,13 +385,13 @@ int8_t pub_sub(void)
 	SUCCESS_OR_EXIT(rc);
 
 	if (connected)
-		subscribe(&client_ctx, sub_topic_name, numberOfSubTopics);
+		subscribe(&client_ctx, sub_topics, size_of_pub_topics);
 
 	while (connected) {
 		r = -1;
 
 		for(int index=0; index<LIMIT; index++)
-			pub_switch_state(&buttons[index], index, pub_topic_name[index]);
+			pub_switch_state(&buttons[index], index, pub_topics[index]);
 
 		rc = process_mqtt_and_sleep(&client_ctx, APP_SLEEP_MSECS);
 		SUCCESS_OR_BREAK(rc);
